@@ -156,9 +156,7 @@ class LoginPage extends HookConsumerWidget {
                   title: LocaleKeys.signInWithGoogle,
                   fontWeight: FontWeight.bold,
                   fontSize: FontAlias.fontAlias18,
-                  onPressed: () async {
-                    await viewModel.loginWithGoogle();
-                  },
+                  onPressed: () async {},
                 ),
               ],
             ),

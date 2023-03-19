@@ -93,12 +93,12 @@ class AppRouter extends _i2.RootStackRouter {
   List<_i2.RouteConfig> get routes => [
         _i2.RouteConfig(
           InitPageRoute.name,
-          path: '/init-page',
+          path: '/',
           guards: [authGuard],
         ),
         _i2.RouteConfig(
           LoginPageRoute.name,
-          path: '/',
+          path: '/login-page',
         ),
         _i2.RouteConfig(
           SignUpPageRoute.name,
@@ -125,7 +125,7 @@ class InitPageRoute extends _i2.PageRouteInfo<void> {
   const InitPageRoute()
       : super(
           InitPageRoute.name,
-          path: '/init-page',
+          path: '/',
         );
 
   static const String name = 'InitPageRoute';
@@ -137,7 +137,7 @@ class LoginPageRoute extends _i2.PageRouteInfo<void> {
   const LoginPageRoute()
       : super(
           LoginPageRoute.name,
-          path: '/',
+          path: '/login-page',
         );
 
   static const String name = 'LoginPageRoute';

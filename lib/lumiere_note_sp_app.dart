@@ -2,9 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:lumiere_note_sp/data/remotes/graphql/client_provider.dart';
 import 'package:lumiere_note_sp/gen/fonts.gen.dart';
 import 'package:lumiere_note_sp/presentation/navigation/auto_slide_route_observer.dart';
 import 'package:lumiere_note_sp/presentation/navigation/navigation_handler.dart';
@@ -41,32 +39,23 @@ class LumiereNoteSpApp extends HookConsumerWidget {
           shouldFooterFollowWhenNotFull: (state) {
             return false;
           },
-          child: FutureBuilder<ValueNotifier<GraphQLClient>>(
-              future: ref.read(clientProvider).graphQLClient,
-              builder: (context, data) {
-                if (data.hasData) {
-                  return GraphQLProvider(
-                    client: data.data,
-                    child: MaterialApp.router(
-                        debugShowCheckedModeBanner: false,
-                        theme:
-                            ThemeData(fontFamily: FontFamily.sFProTextRegular),
-                        builder: EasyLoading.init(),
-                        routerDelegate: AutoRouterDelegate(
-                          appRouter,
-                          navigatorObservers: () => [
-                            AutoSlideRouteObserver(),
-                          ],
-                        ),
-                        routeInformationProvider: appRouter.routeInfoProvider(),
-                        routeInformationParser: appRouter.defaultRouteParser(),
-                        localizationsDelegates: context.localizationDelegates,
-                        supportedLocales: context.supportedLocales,
-                        locale: language),
-                  );
-                }
-                return Container();
-              }),
+          child: FutureBuilder(builder: (context, data) {
+            return MaterialApp.router(
+                debugShowCheckedModeBanner: false,
+                theme: ThemeData(fontFamily: FontFamily.sFProTextRegular),
+                builder: EasyLoading.init(),
+                routerDelegate: AutoRouterDelegate(
+                  appRouter,
+                  navigatorObservers: () => [
+                    AutoSlideRouteObserver(),
+                  ],
+                ),
+                routeInformationProvider: appRouter.routeInfoProvider(),
+                routeInformationParser: appRouter.defaultRouteParser(),
+                localizationsDelegates: context.localizationDelegates,
+                supportedLocales: context.supportedLocales,
+                locale: language);
+          }),
         ),
       );
     });

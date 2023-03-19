@@ -5,7 +5,7 @@
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
-// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal
+// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,10 +21,12 @@ class $AssetsIconsGen {
   AssetGenImage get icHome => const AssetGenImage('assets/icons/ic_home.png');
 
   /// File path: assets/icons/ic_home_selected.png
-  AssetGenImage get icHomeSelected => const AssetGenImage('assets/icons/ic_home_selected.png');
+  AssetGenImage get icHomeSelected =>
+      const AssetGenImage('assets/icons/ic_home_selected.png');
 
   /// File path: assets/icons/ic_my_profile.png
-  AssetGenImage get icMyProfile => const AssetGenImage('assets/icons/ic_my_profile.png');
+  AssetGenImage get icMyProfile =>
+      const AssetGenImage('assets/icons/ic_my_profile.png');
 
   /// File path: assets/icons/ic_my_profile_selected.png
   AssetGenImage get icMyProfileSelected =>
@@ -34,19 +36,23 @@ class $AssetsIconsGen {
   AssetGenImage get icNoti => const AssetGenImage('assets/icons/ic_noti.png');
 
   /// File path: assets/icons/ic_noti_selected.png
-  AssetGenImage get icNotiSelected => const AssetGenImage('assets/icons/ic_noti_selected.png');
+  AssetGenImage get icNotiSelected =>
+      const AssetGenImage('assets/icons/ic_noti_selected.png');
 
   /// File path: assets/icons/ic_pen.png
   AssetGenImage get icPen => const AssetGenImage('assets/icons/ic_pen.png');
 
   /// File path: assets/icons/ic_search.png
-  AssetGenImage get icSearch => const AssetGenImage('assets/icons/ic_search.png');
+  AssetGenImage get icSearch =>
+      const AssetGenImage('assets/icons/ic_search.png');
 
   /// File path: assets/icons/ic_searched.png
-  AssetGenImage get icSearched => const AssetGenImage('assets/icons/ic_searched.png');
+  AssetGenImage get icSearched =>
+      const AssetGenImage('assets/icons/ic_searched.png');
 
   /// File path: assets/icons/ic_ticked.png
-  AssetGenImage get icTicked => const AssetGenImage('assets/icons/ic_ticked.png');
+  AssetGenImage get icTicked =>
+      const AssetGenImage('assets/icons/ic_ticked.png');
 
   $AssetsIconsSvgGen get svg => const $AssetsIconsSvgGen();
 
@@ -70,7 +76,8 @@ class $AssetsImagesGen {
   const $AssetsImagesGen();
 
   /// File path: assets/images/icon_app.png
-  AssetGenImage get iconApp => const AssetGenImage('assets/images/icon_app.png');
+  AssetGenImage get iconApp =>
+      const AssetGenImage('assets/images/icon_app.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [iconApp];
@@ -93,7 +100,8 @@ class $AssetsIconsSvgGen {
   const $AssetsIconsSvgGen();
 
   /// File path: assets/icons/svg/ic_account.svg
-  SvgGenImage get icAccount => const SvgGenImage('assets/icons/svg/ic_account.svg');
+  SvgGenImage get icAccount =>
+      const SvgGenImage('assets/icons/svg/ic_account.svg');
 
   /// File path: assets/icons/svg/ic_bell.svg
   SvgGenImage get icBell => const SvgGenImage('assets/icons/svg/ic_bell.svg');
@@ -102,20 +110,30 @@ class $AssetsIconsSvgGen {
   SvgGenImage get icFire => const SvgGenImage('assets/icons/svg/ic_fire.svg');
 
   /// File path: assets/icons/svg/ic_handshake.svg
-  SvgGenImage get icHandshake => const SvgGenImage('assets/icons/svg/ic_handshake.svg');
+  SvgGenImage get icHandshake =>
+      const SvgGenImage('assets/icons/svg/ic_handshake.svg');
 
   /// File path: assets/icons/svg/ic_home.svg
   SvgGenImage get icHome => const SvgGenImage('assets/icons/svg/ic_home.svg');
 
   /// File path: assets/icons/svg/ic_question.svg
-  SvgGenImage get icQuestion => const SvgGenImage('assets/icons/svg/ic_question.svg');
+  SvgGenImage get icQuestion =>
+      const SvgGenImage('assets/icons/svg/ic_question.svg');
 
   /// File path: assets/icons/svg/ic_round-search.svg
-  SvgGenImage get icRoundSearch => const SvgGenImage('assets/icons/svg/ic_round-search.svg');
+  SvgGenImage get icRoundSearch =>
+      const SvgGenImage('assets/icons/svg/ic_round-search.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values =>
-      [icAccount, icBell, icFire, icHandshake, icHome, icQuestion, icRoundSearch];
+  List<SvgGenImage> get values => [
+        icAccount,
+        icBell,
+        icFire,
+        icHandshake,
+        icHome,
+        icQuestion,
+        icRoundSearch
+      ];
 }
 
 class Assets {
@@ -207,13 +225,14 @@ class SvgGenImage {
     AlignmentGeometry alignment = Alignment.center,
     bool allowDrawingOutsideViewBox = false,
     WidgetBuilder? placeholderBuilder,
-    Color? color,
-    BlendMode colorBlendMode = BlendMode.srcIn,
     String? semanticsLabel,
     bool excludeFromSemantics = false,
-    Clip clipBehavior = Clip.hardEdge,
-    bool cacheColorFilter = false,
-    SvgTheme? theme,
+    SvgTheme theme = const SvgTheme(),
+    ColorFilter? colorFilter,
+    @deprecated Color? color,
+    @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
+    @deprecated Clip? clipBehavior,
+    @deprecated bool cacheColorFilter = false,
   }) {
     return SvgPicture.asset(
       _assetName,
@@ -227,13 +246,12 @@ class SvgGenImage {
       alignment: alignment,
       allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
       placeholderBuilder: placeholderBuilder,
-      color: color,
-      colorBlendMode: colorBlendMode,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
-      clipBehavior: clipBehavior,
-      cacheColorFilter: cacheColorFilter,
       theme: theme,
+      color: color,
+      colorBlendMode: colorBlendMode,
+      cacheColorFilter: cacheColorFilter,
     );
   }
 

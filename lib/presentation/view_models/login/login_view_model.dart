@@ -2,25 +2,17 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:lumiere_note_sp/data/remotes/google_sign_in.dart';
-import 'package:lumiere_note_sp/data/locals/app_preferences/app_preferences.dart';
-import 'package:lumiere_note_sp/domain/entities/user/user_detail.dart';
-import 'package:lumiere_note_sp/domain/repositories/login_repository.dart';
 import 'package:lumiere_note_sp/generated/locale_keys.g.dart';
 import 'package:lumiere_note_sp/presentation/navigation/app_router.gr.dart';
 import 'package:lumiere_note_sp/presentation/navigation/navigation_handler.dart';
 import 'package:lumiere_note_sp/presentation/view_models/base/base_view_model.dart';
 import 'package:lumiere_note_sp/presentation/view_models/login/login_state.dart';
 import 'package:lumiere_note_sp/presentation/view_models/login/login_validate.dart';
-import 'package:lumiere_note_sp/utils/ui_util.dart';
 
 class LoginViewModel extends BaseViewModel<LoginState> {
-  LoginViewModel(
-      {required this.navigationHandler, required this.loginRepository})
-      : super(LoginState());
+  LoginViewModel({required this.navigationHandler}) : super(LoginState());
 
   final NavigationHandler navigationHandler;
-  final LoginRepository loginRepository;
 
   @override
   Future<void> onInit() async {}
@@ -55,26 +47,6 @@ class LoginViewModel extends BaseViewModel<LoginState> {
           maskType: EasyLoadingMaskType.black,
         );
       }
-      final response = await loginRepository.login(
-        state.email,
-        state.password,
-      );
-
-      final result = await response.when(success: (data) async {
-        final loginAccount = UserDetail.fromJson(
-            data.data?[LoginRepository.loginOperationName] ?? {});
-        await AppPreferences.setProfileData(loginAccount);
-      }, error: (errorMessage) async {
-        UIUtil.showError(errorMessage.toString());
-        print(errorMessage);
-        await EasyLoading.dismiss();
-        return false;
-      });
-      isLoading = false;
-      if (!isLoading) {
-        await EasyLoading.dismiss();
-      }
-      return result ?? false;
     }
     return false;
   }
@@ -95,15 +67,5 @@ class LoginViewModel extends BaseViewModel<LoginState> {
 
   bool isPasswordValid() {
     return LoginValidationResults.validatePassword(state.password).isValid;
-  }
-
-  Future<void> loginWithGoogle() async {
-    // await EasyLoading.show();
-    // final googleSignInstance = await GoogleSignInFirebase.getInstance();
-    // final bool isLogin = await googleSignInstance!.signInGoogle();
-    // if (isLogin) {
-    //   await EasyLoading.dismiss();
-    //   await navigationHandler.push(route: InitPageRoute());
-    // }
   }
 }

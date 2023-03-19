@@ -5,8 +5,8 @@ import 'package:lumiere_note_sp/presentation/pages/pages.dart';
 @CustomAutoRouter(
     replaceInRouteName: 'Page',
     routes: <AutoRoute>[
-      AutoRoute(page: InitPage, guards: [AuthGuard]),
-      AutoRoute(initial: true, page: LoginPage),
+      AutoRoute(initial: true, page: InitPage, guards: [AuthGuard]),
+      AutoRoute(page: LoginPage),
       AutoRoute(page: SignUpPage),
       AutoRoute(page: SMSConfirmationPage),
       AutoRoute(page: WelcomePage),

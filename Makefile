@@ -31,7 +31,7 @@ POUND = \#
 
 .DEFAULT_GOAL := help
 
-colors: ## すべての色を表示する
+colors: 
 	@echo "${BLACK}BLACK${RESET}"
 	@echo "${RED}RED${RESET}"
 	@echo "${GREEN}GREEN${RESET}"
@@ -49,98 +49,43 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: setup
-setup: ## プロジェクトのセットアップ
-	@echo "${GREEN}╠ プロジェクトのセットアップ${RESET}"
+setup: 
+	@echo "${GREEN}╠ Project setup${RESET}"
 	@fvm flutter pub get
 	@fvm flutter pub run easy_localization:generate --source-dir assets/translations -f keys -o locale_keys.g.dart
 	@fvm flutter packages pub run build_runner build --delete-conflicting-outputs
 
 .PHONY: gen
-gen: ## ワンタイムコード生成をトリガーする
-	@echo "${BLUE}コードの生成。。。。${RESET}"
+gen: 
+	@echo "${BLUE}Generate code. . . ${RESET}"
 	@fvm flutter pub run easy_localization:generate --source-dir assets/translations -f keys -o locale_keys.g.dart
 	@fvm flutter pub run build_runner build --delete-conflicting-outputs
 
-.PHONY: watch
-watch: ## ファイルを監視し、変更時にコード生成をトリガーする
-	@echo "${BLUE}コードの生成。。。。${RESET}"
-	@fvm flutter pub run build_runner watch --delete-conflicting-outputs
-
 .PHONY: analyze
-analyze: ## コードを分析する
+analyze:
+	@echo "${BLUE}Analyze code. . . ${RESET}"
 	@fvm flutter analyze
 	@fvm flutter pub run dart_code_metrics:metrics analyze lib
 
-.PHONY: run_dev_mock
-run_dev_mock: ## dev でモバイル アプリケーションを実行します
-	@echo "${GREEN}╠ dev でダミー データを使用してアプリを実行する${RESET}"
-	@fvm flutter run --flavor dev lib/main_dev.dart
-
-.PHONY: run_stg
-run_stg: ## stg でモバイル アプリケーションを実行します
-	@echo "${GREEN}╠ stgでダミー データを使用してアプリを実行する${RESET}"
-	@fvm flutter run --flavor staging lib/main_stg.dart
-
 .PHONY: format
-format: ## コードのフォーマット
-	@echo "${YELLOW}╠ コードのフォーマット${RESET}"
+format:
+	@echo "${YELLOW}╠ Format code. . . ${RESET}"
 	@dart format .
-
-.PHONY: lint
-lint: ## コードをリントします
-	@echo "${YELLOW}╠ コードを確認しています。。。。${RESET}"
-	@dart analyze . || (echo "${RED}プロジェクトのエラー${RESET}"; exit 1)
 
 .PHONY: upgrade
 upgrade: clean ## 依存関係をアップグレードする
-	@echo "${LIGHTPURPLE}╠ 依存関係をアップグレード中。。。${RESET}"
+	@echo "${LIGHTPURPLE}╠ Upgrade dependencies. . . ${RESET}"
 	@fvm flutter pub upgrade
 
 .PHONY: clean
 clean: ## 環境をきれいにします。
-	@echo "${YELLOW}╠ プロジェクトをクリーニング中。。。。${RESET}"
+	@echo "${YELLOW}╠ Clean build code${RESET}"
 	@rm -rf pubspec.lock
 	@fvm flutter clean
 
-.PHONY: run_unit_test
-run_unit_test: ## テストを実行します
-	@echo "${GREEN}╠ テストの実行する${RESET}"
-	@fvm flutter test || (echo "${RED}テスト実行中のエラー${RESET}"; exit 1)
-
-.PHONY: build_apk_android_dev
-build_android_dev: ## dev で apk アプリケーションをビルドする
-	@echo "${GREEN}╠ devのapk をビルドする${RESET}"
-	flutter build apk --flavor dev --target lib/main_dev.dart
-
-.PHONY: build_apk_android_dev
-build_app_bundle_android_dev: ## dev でアプリ バンドル アプリケーションをビルドする
-	@echo "${GREEN}╠ devのapk をビルドする${RESET}"
-	flutter build appbundle --flavor dev --target lib/main_dev.dart
-
-.PHONY: build_apk_android_stg
-build_android_staging: ## ステージングで apk バンドル アプリケーションをビルドする
-	@echo "${GREEN}╠ stgのAPK のビルド${RESET}"
-	flutter build apk --flavor staging --target lib/main_staging.dart
-
-.PHONY: build_apk_android_stg
-build_app_bundle_android_staging: ## ステージングで App Bundle アプリケーションをビルドする
-	@echo "${GREEN}╠ stgのAPK のビルド${RESET}"
-	flutter build appbundle --flavor staging --target lib/main_staging.dart
-
-.PHONY: build_apk_android_dev
-build_ios_dev: ## dev で iOS アプリケーションをビルドする
-	@echo "${GREEN}╠ devのAPK のビルド${RESET}"
-	flutter build ios --flavor dev --target lib/main_dev.dart
-
-.PHONY: build_apk_android_stg
-build_ios_staging: ## ステージングで iOS アプリケーションをビルドする
-	@echo "${GREEN}╠ stgのAPK のビルド${RESET}"
-	@fvm flutter build ios --flavor staging --target lib/main_staging.dart
-
-.PHONY: lefthook
-lefthook: ## lefthookインストール
-	@echo "${GREEN}╠ lefthook設定する (pre-commit | pre-push)${RESET}"
-	@npm install @evilmartians/lefthook-installer --save-dev && npx lefthook install
+.PHONY: run
+run:
+	@fvm flutter run --flavor dev --target lib/main_dev.dart
 
 .PHONY: flavor
 flavor: ## lefthookインストール
