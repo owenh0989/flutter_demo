@@ -42,7 +42,10 @@ class LumiereNoteSpApp extends HookConsumerWidget {
           child: FutureBuilder(builder: (context, data) {
             return MaterialApp.router(
                 debugShowCheckedModeBanner: false,
-                theme: ThemeData(fontFamily: FontFamily.sFProTextRegular),
+                theme: ThemeData(
+                  fontFamily: FontFamily.sFProTextRegular,
+                  useMaterial3: true,
+                ),
                 builder: EasyLoading.init(),
                 routerDelegate: AutoRouterDelegate(
                   appRouter,

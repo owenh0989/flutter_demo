@@ -75,12 +75,20 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/demo_avatar.jpg
+  AssetGenImage get demoAvatar =>
+      const AssetGenImage('assets/images/demo_avatar.jpg');
+
   /// File path: assets/images/icon_app.png
   AssetGenImage get iconApp =>
       const AssetGenImage('assets/images/icon_app.png');
 
+  /// File path: assets/images/login_image.jpg
+  AssetGenImage get loginImage =>
+      const AssetGenImage('assets/images/login_image.jpg');
+
   /// List of all assets
-  List<AssetGenImage> get values => [iconApp];
+  List<AssetGenImage> get values => [demoAvatar, iconApp, loginImage];
 }
 
 class $AssetsTranslationsGen {

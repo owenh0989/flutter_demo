@@ -1,6 +1,4 @@
 import 'package:lumiere_note_sp/data/locals/app_preferences/app_preferences_keys.dart';
-import 'package:lumiere_note_sp/domain/entities/user/user.dart';
-import 'package:lumiere_note_sp/domain/entities/user/user_detail.dart';
 import 'package:lumiere_note_sp/utils/device_util.dart';
 import 'package:lumiere_note_sp/utils/shared_preferences_util.dart';
 
@@ -118,10 +116,5 @@ class AppPreferences {
   Future<void> setLanguage(String language) async {
     await SharedPreferencesUtil.putString(
         AppPreferencesKeys.languageKey, language);
-  }
-
-  static Future<void> setProfileData(UserDetail userDetail) async {
-    await SharedPreferencesUtil.putObject(
-        AppPreferencesKeys.profileDataKey, userDetail);
   }
 }
